@@ -10,15 +10,15 @@ words = {
    "green": 4
 };
 
-// POST route `add/:word/:score
-function addWord(request, response) {
-   let data = request.params;
+// POST route `api/v1/add?
+function addWord(request, response, next) {
+   let data = request.body;
    let receivedWord = data.word;
-   let receivedScore = Number(data.score);
+   let receivedScore = data.score;
    let reply;
 
-   // If score or word params are missing
-   if (!receivedScore) {
+   // If score or word params are missing OR score is not a number
+   if (!receivedScore || !receivedWord || typeof receivedScore !== 'number') {
       reply = {
          "status": statuses(400)
       };
@@ -29,16 +29,29 @@ function addWord(request, response) {
          "data": [
             {
                "status": statuses(200),
-               "words": words
+               "word": {
+                  "name": receivedWord,
+                  "score": receivedScore
+               }
             }
          ]
       };
    }
-   // Send response to client
-   response.send(reply);
+   let newWord = new Words({
+      text: receivedWord,
+      score: receivedScore
+   });
+
+   newWord.save().then((doc) => {
+      // Send response to client
+      response.send(reply);
+      next();
+   }, (error) => {
+      response.send(error)
+   });
 }
 
-// GET route `api/all`
+// GET route `api/v1/all`
 function getAllWords(request, response) {
    // Build message to send to client
    let reply = {
