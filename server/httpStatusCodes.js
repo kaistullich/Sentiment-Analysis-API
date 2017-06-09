@@ -1,3 +1,11 @@
+/**
+ * The purpose of this function is to reduce "DRY".
+ * The function takes in a HTTP Status Code, and creates
+ * the message that will be sent out via response.send()
+ *
+ * @param {Number} httpStatus
+ * @returns {Object} The status message that will be sent
+ */
 function statuses(httpStatus) {
     // Init the statusMsg object
     let statusMsg;

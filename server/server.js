@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {addWord} = require("./routes");
+const {addWord} = require("./routesCallbacks");
 
 
 let app = express();
