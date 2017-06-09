@@ -1,3 +1,5 @@
 node_modules/
 .DS_Store
 .idea/
+server/afinn.json
+server/AFINN-111.txt
