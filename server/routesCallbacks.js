@@ -10,7 +10,7 @@ words = {
    "green": 4
 };
 
-// Route `add/:word/:score
+// POST route `add/:word/:score
 function addWord(request, response) {
    let data = request.params;
    let receivedWord = data.word;
@@ -38,7 +38,23 @@ function addWord(request, response) {
    response.send(reply);
 }
 
+// GET route `api/all`
+function getAllWords(request, response) {
+   // Build message to send to client
+   let reply = {
+      "data": [
+         {
+            "status": statuses(200),
+            words
+         }
+      ]
+   };
+   // Send response to client
+   response.send(reply);
+}
+
 // Exports
 module.exports = {
-   addWord
+   addWord,
+   getAllWords
 };
