@@ -1,4 +1,15 @@
+extends base
 
-	//
-   Created by Kai on 6/10/17.
-
+block head
+	link(href="css/404.css" rel="stylesheet")
+block content
+	.row
+		.col-md-12
+			.error-template
+				h1 Oops!
+				h2 404 Not Found
+				.error-detail Sorry, an error has occurred the requested page was not found!
+				.error-actions
+					a.btn.btn-primary.btn-lg(href='/')
+						i.fa.fa-home
+						|				Take me home
