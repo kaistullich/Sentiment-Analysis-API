@@ -49,36 +49,26 @@ function addWord(request, response, next) {
 
 // GET route `api/v1/all`
 function getAllWords(request, response) {
+
    let reply;
-   if (request.method === 'GET') {
-      console.log('This was a GET request');
-      // query DB
-      Words.find({}, (error, wordDocs) => {
-         if (error) {
-            throw error
-         }
-         // Build message to send to client
-         reply = {
-            "data": [
-               {
-                  "status": statuses(200),
-                  "words": wordDocs
-               }
-            ]
-         };
-         // Send response to client
-         response.send(reply);
-         // Exclude these properties from displaying
-      }).select('-__v -_id');
-   }
-   if (request.method === 'POST') {
-      console.log('This was a POST request');
+   // query DB
+   Words.find({}, (error, wordDocs) => {
+      if (error) {
+         throw error
+      }
+      // Build message to send to client
       reply = {
-         "msg": "HTTP Method not allowed"
+         "data": [
+            {
+               "status": statuses(200),
+               "words": wordDocs
+            }
+         ]
       };
       // Send response to client
-      response.send(reply)
-   }
+      response.send(reply);
+      // Exclude these properties from displaying
+   }).select('-__v -_id');
 }
 
 // Exports
