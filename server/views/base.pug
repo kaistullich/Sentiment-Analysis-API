@@ -61,6 +61,10 @@ html
 						// Contact section
 						div.col-lg-4.col-md-5.col-sm-12.col-xs-12
 							h3.text-center Get in contact with me!
+							// successful email submit will show
+							div.alert.alert-success.text-center#emailSuccess(role="alert")
+							// error in submit will show
+							div.alert.alert-danger.text-center#emailError(role="alert")
 							ul
 								li
 									div.submit.contact-box
