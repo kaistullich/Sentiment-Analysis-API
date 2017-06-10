@@ -3,3 +3,4 @@ node_modules/
 .idea/
 server/afinn.json
 server/AFINN-111.txt
+testing_space
