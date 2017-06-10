@@ -53,17 +53,16 @@ function getAllWords(request, response) {
    if (request.method === 'GET') {
       console.log('This was a GET request');
       // query DB
-      Words.find({}, (error, data) => {
+      Words.find({}, (error, wordDocs) => {
          if (error) {
             throw error
          }
-         // object of all the words
          // Build message to send to client
          reply = {
             "data": [
                {
                   "status": statuses(200),
-                  "words": data
+                  "words": wordDocs
                }
             ]
          };
