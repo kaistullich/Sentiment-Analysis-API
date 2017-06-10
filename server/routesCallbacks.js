@@ -7,7 +7,9 @@ const {mongoose} = require('../db/mongoose');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 
+// ****************
 // ** GET ROUTES **
+// ****************
 
 // route `api/v1/all`
 function getAllWords(request, response) {
@@ -77,7 +79,9 @@ function getOneWord(request, response) {
 }
 
 
+// *****************
 // ** POST ROUTES **
+// *****************
 
 // route `api/v1/add?
 function addWord(request, response, next) {
