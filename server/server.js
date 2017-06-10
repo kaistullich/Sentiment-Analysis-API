@@ -3,7 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const hbs = require('handlebars');
 
-const {addWord, getAllWords, getOneWord} = require("./routesCallbacks");
+const {addWord, getAllWords, getOneWord, handleEmailRequest} = require("./routesCallbacks");
 
 // init app
 let app = express();
@@ -30,6 +30,9 @@ app.get('/api/v1/one-word/:word', getOneWord);
 
 // all API POST routes
 app.post('/api/v1/add?', addWord);
+
+// email process route
+app.post('/process_email', handleEmailRequest);
 
 // render 404 for unsuccessful requests
 app.get('*', (request, response) => {

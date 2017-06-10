@@ -123,9 +123,18 @@ function addWord(request, response, next) {
    });
 }
 
+// email callback handler
+function handleEmailRequest(request, response, next) {
+   let emailData = request.body.comment;
+   console.log('body: ' , emailData);
+   response.send(request.body);
+   next();
+}
+
 // Exports
 module.exports = {
    addWord,
    getAllWords,
-   getOneWord
+   getOneWord,
+   handleEmailRequest
 };

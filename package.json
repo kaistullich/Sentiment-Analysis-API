@@ -13,6 +13,7 @@
     "express": "^4.15.3",
     "handlebars": "^4.0.10",
     "mongoose": "^4.10.5",
+    "nodemailer": "^4.0.1",
     "pug": "^2.0.0-rc.2"
   }
 }

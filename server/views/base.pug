@@ -64,9 +64,10 @@ html
 							ul
 								li
 									div.submit.contact-box
-										textarea.form-control#textarea(placeholder="Questions / Inquires . . .")
-										br
-										input.btn.btn-grey.form-control#submit(placeholder="Submit" type="submit" value="Submit" )
+										form#email-form(action="/send-email" method="POST")
+											textarea.form-control#commentTextarea(placeholder="Questions / Inquires . . .")
+											br
+											input.btn.btn-grey.form-control#submit(placeholder="Submit" type="submit" value="Submit" )
 							// social-media images/links
 						div.col-lg-4.col-md-4.col-sm-12.col-xs-12
 							h3 Follow me here!
@@ -85,3 +86,4 @@ html
 							- var currentYear = new Date().getFullYear();
 							p.text-center Created by Kai Stullich - Copyright &copy #{currentYear}
 			// end footer
+			script(src="/js/send-email.js")
