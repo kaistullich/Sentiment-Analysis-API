@@ -1,14 +1,10 @@
+// npm installed packages
 const {statuses} = require('./httpStatusCodes');
 
-const {Words} = require('./models/words');
+// Local modules/packages
+const {Words} = require('./models/wordsModel');
 const {mongoose} = require('../db/mongoose');
 
-words = {
-   "goofy": 10,
-   "hate": 3,
-   "unicorn": 5,
-   "green": 4
-};
 
 // POST route `api/v1/add?
 function addWord(request, response, next) {
@@ -38,7 +34,7 @@ function addWord(request, response, next) {
       };
    }
    let newWord = new Words({
-      text: receivedWord,
+      word: receivedWord,
       score: receivedScore
    });
 
@@ -53,17 +49,37 @@ function addWord(request, response, next) {
 
 // GET route `api/v1/all`
 function getAllWords(request, response) {
-   // Build message to send to client
-   let reply = {
-      "data": [
-         {
-            "status": statuses(200),
-            words
+   let reply;
+   if (request.method === 'GET') {
+      console.log('This was a GET request');
+      // query DB
+      Words.find({}, (error, data) => {
+         if (error) {
+            throw error
          }
-      ]
-   };
-   // Send response to client
-   response.send(reply);
+         // object of all the words
+         // Build message to send to client
+         reply = {
+            "data": [
+               {
+                  "status": statuses(200),
+                  "words": data
+               }
+            ]
+         };
+         // Send response to client
+         response.send(reply);
+         // Exclude these properties from displaying
+      }).select('-__v -_id');
+   }
+   if (request.method === 'POST') {
+      console.log('This was a POST request');
+      reply = {
+         "msg": "HTTP Method not allowed"
+      };
+      // Send response to client
+      response.send(reply)
+   }
 }
 
 // Exports
