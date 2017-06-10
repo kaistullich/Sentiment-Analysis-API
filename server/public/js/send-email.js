@@ -1,7 +1,8 @@
 $(document).ready(function () {
+   let successAlert = $('#emailSuccess').hide();
+   let errorAlert = $('#emailError').hide();
 
    $('form').on('submit', (event) => {
-
       // prevent default form submit action
       event.preventDefault();
 
@@ -17,15 +18,17 @@ $(document).ready(function () {
 
       // build ajax request
       $.ajax({
-         url: 'http://localhost:5000/process_email',
+         url: 'http://localhost:5000/process_emai',
          data: JSON.stringify(emailData),
          type: 'POST',
          contentType: 'application/json',
          success: (data) => {
             $('#commentTextarea').val('');
+            successAlert.show().html('<b>I received your comment, thanks!</b>');
          },
          error: (err) => {
             $('#commentTextarea').val('');
+            errorAlert.show().html('<b>An unexpected error occurred :(</b>');
          }
       });
    });
