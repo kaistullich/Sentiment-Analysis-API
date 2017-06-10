@@ -1,10 +1,7 @@
-// npm installed packages
-const {statuses} = require('./httpStatusCodes');
-
 // Local modules/packages
+const {statuses} = require('./httpStatusCodes');
 const {Words} = require('./models/wordsModel');
 const {mongoose} = require('../db/mongoose');
-const ObjectId = require('mongoose').Types.ObjectId;
 
 
 // ****************
