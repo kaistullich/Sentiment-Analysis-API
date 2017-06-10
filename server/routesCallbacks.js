@@ -12,6 +12,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 // route `api/v1/all`
 function getAllWords(request, response) {
 
+   // init reply object
    let reply;
    // query DB
    Words.find({}, (error, wordDocs) => {
@@ -36,13 +37,16 @@ function getAllWords(request, response) {
 // route `/api/v1/one-word/:word
 function getOneWord(request, response) {
 
+   // init reply object
    let reply;
+   // grab word from query parameter
    let data = request.params.word;
    // query DB for :word
    Words.findOne({word: data}).exec((error, wordDoc) => {
       if (error) {
          throw error
       }
+      // if there was no match with the data sent vs. data in collection
       if (wordDoc === null) {
          reply = {
             "data": [
@@ -52,8 +56,10 @@ function getOneWord(request, response) {
                }
             ]
          };
+         // send response to client
          response.send(reply);
       }
+      // data sent matches in collection
       else {
          reply = {
             "data": [
@@ -64,6 +70,7 @@ function getOneWord(request, response) {
                }
             ]
          };
+         // send response to client
          response.send(reply);
       }
    });
