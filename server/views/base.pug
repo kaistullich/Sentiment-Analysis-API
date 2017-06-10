@@ -17,6 +17,8 @@ html
 		crossorigin="anonymous")
 		// Bootstrap JS
 		script(src="/js/bootstrap.min.js")
+
+		// any additional scripts/links in this block
 		block head
 
 	body
@@ -29,59 +31,55 @@ html
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand(href='#') Project name
+					a.navbar-brand(href='/')
+						i SA API
 				#navbar.collapse.navbar-collapse
 					ul.nav.navbar-nav
-						li.active
-							a(href='#') Home
 						li
-							a(href='#about') About
+							a(href='/') Home
 						li
-							a(href='#contact') Contact
-				// /.nav-collapse
+							a(href='/docs') Docs
+				// end navbar
 
 		// content for the whole page
 		div.container#base-content-container
 			block content
+
 		// begin footer
 		footer
 			div.footer#footer
 				div.container
 					div.row
 						// navigation links
-						div(class="col-lg-4 col-md-3 col-sm-12 col-xs-6")
+						div.col-lg-4.col-md-3.col-sm-12.col-xs-6
 							h3.text-center Navigation
 							ul
 								li
-									a(href="#") Link #1
+									a(href="/") Home
 								li
-									a(href="#") Link #2
-								li
-									a(href="#") Link #3
-								li
-									a(href="#") Link #4
+									a(href="/docs") Docs
 						// Contact section
-						div(class="col-lg-4 col-md-5 col-sm-12 col-xs-12")
+						div.col-lg-4.col-md-5.col-sm-12.col-xs-12
 							h3.text-center Get in contact with me!
 							ul
 								li
-									div(class="submit contact-box")
-										textarea(class="form-control" id="textarea" placeholder="Questions / Inquires. . .")
+									div.submit.contact-box
+										textarea.form-control#textarea(placeholder="Questions / Inquires . . .")
 										br
-										input(type="submit" value="Submit" class="btn btn-grey form-control" placeholder="Submit" id="submit")
+										input.btn.btn-grey.form-control#submit(placeholder="Submit" type="submit" value="Submit" )
 							// social-media images/links
-						div(class="col-lg-4 col-md-4 col-sm-12 col-xs-12")
+						div.col-lg-4.col-md-4.col-sm-12.col-xs-12
 							h3 Follow me here!
 							ul.social
 								li
 									a(href="https://www.facebook.com/profile.php?id=100008360227661")
-										i(class="fa fa-facebook" aria-hidden="true")
+										i.fa.fa-facebook(aria-hidden="true")
 								li
 									a(href="https://github.com/kaistullich")
-										i(class="fa fa-github" aria-hidden="true")
+										i.fa.fa-github(aria-hidden="true")
 								li
 									a(href="https://www.linkedin.com/in/kai-stullich-a0697a91/")
-										i(class="fa fa-linkedin" aria-hidden="true")
+										i.fa.fa-linkedin(aria-hidden="true")
 					div.row#footer-bottom
 						div.container
 							- var currentYear = new Date().getFullYear();
