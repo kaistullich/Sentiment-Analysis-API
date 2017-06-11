@@ -69,9 +69,15 @@ html
 								li
 									div.submit.contact-box
 										form#email-form(action="/send-email" method="POST")
-											textarea.form-control#commentTextarea(placeholder="Questions / Inquires . . .")
+											label(for="commentTextarea")
+												b Comment / Inquires:
+											textarea.form-control#commentTextarea(placeholder="Type here ...")
 											br
-											input.btn.btn-grey.form-control#submit(placeholder="Submit" type="submit" value="Submit" )
+											label(for="emailAddress")
+												b Your email address:
+											input.form-control#emailAddress(placeholder="")
+											br
+											input.btn.btn-primary.form-control#submit(placeholder="Submit" type="submit" value="Submit" )
 							// social-media images/links
 						div.col-lg-4.col-md-4.col-sm-12.col-xs-12
 							h3 Follow me here!
