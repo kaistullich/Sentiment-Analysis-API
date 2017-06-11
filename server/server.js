@@ -1,9 +1,11 @@
+// npm install modules
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const hbs = require('handlebars');
+const expressValidator = require('express-validator');
 
-const {addWord, getAllWords, getOneWord, handleEmailRequest} = require("./routesCallbacks");
+// local modules
+const callbacks = require("./routesCallbacks");
 
 // init app
 let app = express();
@@ -15,24 +17,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
 // use bodyParser for middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(expressValidator());
 
 
 // all HTML routes
 app.get('/', function (req, res) {
-   res.render('index')
+   res.render('index', {
+      title: 'SA API - Home',
+      success: false,
+      errors: req.session.errors
+   });
+   req.session.errors = null;
 });
 
 
 // all API GET routes
-app.get('/api/v1/all', getAllWords);
-app.get('/api/v1/one-word/:word', getOneWord);
+app.get('/api/v1/all', callbacks.getAllWords);
+app.get('/api/v1/one-word/:word', callbacks.getOneWord);
 
 
 // all API POST routes
-app.post('/api/v1/add?', addWord);
+app.post('/api/v1/add?', callbacks.addWord);
 
 // email process route
-app.post('/process_email', handleEmailRequest);
+app.post('/process_email', callbacks.handleEmailRequest);
 
 // render 404 for unsuccessful requests
 app.get('*', (request, response) => {
@@ -43,6 +52,6 @@ app.get('*', (request, response) => {
 // Start server
 const port = 5000;
 app.listen(port, () => {
-    console.log('Listening . . . ');
+   console.log('Listening . . . ');
 });
 
