@@ -130,47 +130,61 @@ function addWord(request, response, next) {
 // email callback handler
 function handleEmailRequest(request, response, next) {
 
-   // request body
-   let requestEmailData = request.body;
-   // comment in body
-   let comment = requestEmailData.comment;
-   // email address in body
-   let emailAddress = requestEmailData.emailAddress;
+   // validate that both parameters are not empty
+   request.check('comment', 'Comment cannot be empty').notEmpty();
+   request.check('emailAddress', 'Invalid or missing email').isEmail();
+   // sanitize both input fields
+   request.sanitizeBody('comment').escape();
+   request.sanitizeBody('emailAddress').escape();
+   // all errors
+   let errors = request.validationErrors();
+   
+   if (errors) {
+      console.log('email submit error');
+   }
+   else {
+      // request body
+      let requestEmailData = request.body;
+      // comment in body
+      let comment = requestEmailData.comment;
+      // email address in body
+      let emailAddress = requestEmailData.emailAddress;
 
-   response.send(request.body);
-   next();
+      response.send(request.body);
+      next();
 
-   // create reusable transporter object using the default SMTP transport
-   let transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // secure:true for port 465, secure:false for port 587
-      auth: {
-         user: config.user,
-         pass: config.pass
-      }
-   });
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+         host: 'smtp.gmail.com',
+         port: 465,
+         secure: true, // secure:true for port 465, secure:false for port 587
+         auth: {
+            user: config.user,
+            pass: config.pass
+         }
+      });
 
-   // text for email body
-   let emailBody = `<b>${emailAddress}</b> said: <p>${comment}</p>`;
+      // text for email body
+      let emailBody = `<b>${emailAddress}</b> said: <p>${comment}</p>`;
 
-   // setup email data
-   let mailOptions = {
-      from: config.from,
-      to: config.to,
-      subject: '[NEW] Comment / Inquiry Received!',
-      html: emailBody
-   };
+      // setup email data
+      let mailOptions = {
+         from: config.from,
+         to: config.to,
+         subject: '[NEW] Comment / Inquiry Received!',
+         html: emailBody
+      };
 
-   // send mail with defined transport object
-   transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-         return console.log(error);
-      } else {
-         console.log('Email sent: ' + info.response);
-         console.log('Message %s sent: %s', info.messageId, info.response);
-      }
-   });
+      // send mail with defined transport object
+      transporter.sendMail(mailOptions, function(error, info){
+         if (error) {
+            return console.log(error);
+         } else {
+            console.log('Email sent: ' + info.response);
+            console.log('Message %s sent: %s', info.messageId, info.response);
+         }
+      });
+   }
 }
 
 // Exports
