@@ -1,7 +1,11 @@
+// npm install packages
+let nodemailer = require('nodemailer');
+
 // Local modules/packages
 const {statuses} = require('./httpStatusCodes');
 const {Words} = require('./models/wordsModel');
 const {mongoose} = require('../db/mongoose');
+const config = require('./config');
 
 
 // ****************
@@ -125,10 +129,48 @@ function addWord(request, response, next) {
 
 // email callback handler
 function handleEmailRequest(request, response, next) {
-   let emailData = request.body.comment;
-   console.log('body: ' , emailData);
+
+   // request body
+   let requestEmailData = request.body;
+   // comment in body
+   let comment = requestEmailData.comment;
+   // email address in body
+   let emailAddress = requestEmailData.emailAddress;
+
    response.send(request.body);
    next();
+
+   // create reusable transporter object using the default SMTP transport
+   let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // secure:true for port 465, secure:false for port 587
+      auth: {
+         user: config.user,
+         pass: config.pass
+      }
+   });
+
+   // text for email body
+   let emailBody = `<b>${emailAddress}</b> said: <p>${comment}</p>`;
+
+   // setup email data
+   let mailOptions = {
+      from: config.from,
+      to: config.to,
+      subject: '[NEW] Comment / Inquiry Received!',
+      html: emailBody
+   };
+
+   // send mail with defined transport object
+   transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+         return console.log(error);
+      } else {
+         console.log('Email sent: ' + info.response);
+         console.log('Message %s sent: %s', info.messageId, info.response);
+      }
+   });
 }
 
 // Exports
