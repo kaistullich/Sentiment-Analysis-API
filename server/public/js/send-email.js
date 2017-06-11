@@ -11,6 +11,11 @@ $(document).ready(function () {
       let textareaComment = $('#commentTextarea').val();
       // grab text entered into email input
       let emailEntered = $('#emailAddress').val();
+      // check if either fields are empty, stop POST method
+      if (textareaComment === '' || emailEntered === '') {
+         errorAlert.show().html('<b>All fields are required</b>');
+         return false;
+      }
 
       // object that will be sent with ajax
       let emailData = {
