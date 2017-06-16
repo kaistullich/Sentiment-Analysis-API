@@ -1,0 +1,18 @@
+pre
+    code.py.
+        # install the library `requests`, if it is not already installed
+        # pip install requests
+
+        import requests
+
+        # create requests object
+        r = requests.get('http://localhost:5000/api/v1/one-word/funny')
+
+        # check the status
+        print(r.status_code)
+
+        # store the returned data
+        data = r.text
+
+        # print the JSON data
+        print(data)

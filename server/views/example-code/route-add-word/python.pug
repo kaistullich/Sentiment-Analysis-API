@@ -1,0 +1,28 @@
+pre
+    code.py.
+        # install the library `requests`, if it is not already installed
+        # pip install requests
+
+        import requests
+        import json
+
+        # data to be posted
+        payload = {
+            "word" : "bazinga",
+            "score": 4
+        }
+
+        # set headers
+        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+
+        # create requests object with POST data
+        r = requests.post('http://localhost:5000/api/v1/add', data=json.dumps(payload), headers=headers)
+
+        # check the status
+        print(r.status_code)
+
+        # store the returned data
+        data = r.text
+
+        # print the JSON data
+        print(data)

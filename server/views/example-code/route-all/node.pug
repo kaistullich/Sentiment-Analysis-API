@@ -1,0 +1,28 @@
+pre
+    code.javascript.
+        // install request-promise module
+        // npm install request-promise
+
+        // require module
+        const request = require('request-promise');
+
+        // create object
+        const payload = {
+           // set the method type
+           method: 'GET',
+           // url for request
+           uri: 'http://localhost:5000/api/v1/all',
+           // JSON stringifies the body automatically
+           json: true
+        };
+
+        // pass created obj to request method
+        request(payload)
+           // success
+           .then(function (response) {
+              console.log(JSON.stringify(response, undefined, 2));
+           })
+           // error
+           .catch(function (err) {
+              console.log(err);
+           });

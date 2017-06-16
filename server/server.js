@@ -18,17 +18,21 @@ app.set('view engine', 'pug');
 // use bodyParser for middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+// form validator
 app.use(expressValidator());
 
 
 // all HTML routes
-app.get('/', function (req, res) {
-   res.render('index', {
-      title: 'SA API - Home',
-      success: false,
-      errors: req.session.errors
+app.get('/', function (request, response) {
+   response.render('index', {
+      title: 'SA API - Home'
    });
-   req.session.errors = null;
+});
+
+app.get('/docs', function (request, response) {
+   response.render('docs', {
+      title: 'API Docs'
+   })
 });
 
 
