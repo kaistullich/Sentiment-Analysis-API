@@ -5,3 +5,4 @@ server/afinn.json
 server/AFINN-111.txt
 testing_space
 server/config.json
+server/public/css/styles
