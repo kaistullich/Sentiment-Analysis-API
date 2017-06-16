@@ -5,7 +5,7 @@ let nodemailer = require('nodemailer');
 const {statuses} = require('./httpStatusCodes');
 const {Words} = require('./models/wordsModel');
 const {mongoose} = require('../db/mongoose');
-const config = require('./config');
+const config = require('./config.json');
 
 
 // ****************
@@ -126,6 +126,11 @@ function addWord(request, response, next) {
       response.send(error)
    });
 }
+
+
+// *****************
+// ** EMAIL ROUTE **
+// *****************
 
 // email callback handler
 function handleEmailRequest(request, response, next) {
