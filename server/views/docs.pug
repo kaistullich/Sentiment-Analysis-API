@@ -1,23 +1,22 @@
 extends base
 
 block head
-    // stylesheet for docs page
+    //- highlight.js CDN
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css')
+    //- // stylesheet for docs page
     link(rel="stylesheet" href="/css/docs.css")
-    // heme stylesheet from highlighter.js
-    link(rel="stylesheet" href="/css/styles/atom-one-dark.css")
-    // stylesheet for overriding properties in highlighter.js
+    //- // stylesheet for overriding properties in highlighter.js
     link(rel="stylesheet", href="css/hljs-override.css")
-    // highlighter.js
+    //- // highlighter.js
     script(src="/js/highlight.pack.js")
-    // initialize highlighter
+    //-initialize highlighter
     script.
        hljs.initHighlightingOnLoad();
-
 block content
     div.jumbotron.text-center
         h1 #{title}
     div.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2.col-sm-8.col-sm-offset-2
-        // Information section
+        //- // Information section
         div.text-left#routes-info
             strong
                 i Information for all requests:
@@ -27,87 +26,87 @@ block content
                         All available routes for the API have a prefix of: <code>/api/v1</code>. Make sure to include the prefix in all requests.
                     li <code>JSON</code> is the data type returned for all requests.
 
-        // All routes
-        // header for GET routes
+        //- // All routes
+        //- // header for GET routes
         div.text-center#get-header
             h3 GET routes
 
-        // `/all` route
+        //- // `/all` route
         div.well#all
-            // description
+            //- // description
             include example-code/route-all/description/all-description
-            // stores the pills nav list
+            //- // stores the pills nav list
             include includes/__code-nav-pills-all
-            // content for the `/all` pills
+            //- // content for the `/all` pills
             .tab-content
-                // python code example
+                //- // python code example
                 #python-all.tab-pane.fade
                     include example-code/route-all/python
-                // node code example
+                //- // node code example
                 #node-all.tab-pane.fade
                     include example-code/route-all/node
-                // curl code example
+                //- // curl code example
                 #curl-all.tab-pane.fade
                     include example-code/route-all/curl
 
-        // `/one-word/:word` route description
+        //- // `/one-word/:word` route description
         div.well#one-word
-            // description
+            //- // description
             include example-code/route-one-word/description/one-word-description
-            // stores the pills nav list
+            //- // stores the pills nav list
             include includes/__code-nav-pills-one-word
-            // content for the `/one-word` pills
+            //- // content for the `/one-word` pills
             .tab-content
-                // python code example
+                //- // python code example
                 #python-one-word.tab-pane.fade
                     include example-code/route-one-word/python
-                // node code example
+                //- // node code example
                 #node-one-word.tab-pane.fade
                     include example-code/route-one-word/node
-                // curl code example
+                //- // curl code example
                 #curl-one-word.tab-pane.fade
                     include example-code/route-one-word/curl
 
 
-        // header for POST routes
+        //- // header for POST routes
         div.text-center#post-header
             h3 POST routes
 
-        // `/add-word` route description
+        //- // `/add-word` route description
         div.well#add-word
-            // description
+            //- // description
             include example-code/route-add-word/description/add-description
-            // stores the pills nav list
+            //- // stores the pills nav list
             include includes/__code-nav-pills-add-word
 
-            // content for the `/add-word` pills
+            //- // content for the `/add-word` pills
             .tab-content
-                // python code example
+                //- // python code example
                 #python-add-word.tab-pane.fade
                     include example-code/route-add-word/python
-                // node code example
+                //- // node code example
                 #node-add-word.tab-pane.fade
                     include example-code/route-add-word/node
-                // curl code example
+                //- // curl code example
                 #curl-add-word.tab-pane.fade
                     include example-code/route-add-word/curl
 
-        // `/upload` route description
+        //- // `/upload` route description
         div.well#upload
-            // description
+            //- // description
             include example-code/route-upload/description/upload-description
-            // stores the pills nav list
+            //- // stores the pills nav list
             include includes/__code-nav-pills-upload
 
-            // content for the `/upload` pills
+            //- // content for the `/upload` pills
             .tab-content
-                // python code example
+                //- // python code example
                 #python-upload.tab-pane.fade
                     include example-code/route-upload/python
-                // node code example
+                //- // node code example
                 #node-upload.tab-pane.fade
                     include example-code/route-upload/node
-                // curl code example
+                //- // curl code example
                 #curl-upload.tab-pane.fade
                     include example-code/route-upload/curl
 
