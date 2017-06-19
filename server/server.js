@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 
 // local modules
-const callbacks = require("./routesCallbacks");
+const callbacks = require('./routesCallbacks');
 
 // init app
 let app = express();
@@ -24,15 +24,15 @@ app.use(expressValidator());
 
 // all HTML routes
 app.get('/', function (request, response) {
-   response.render('index', {
-      title: 'SA API - Home'
-   });
+    response.render('index', {
+        title: 'SA API - Home'
+    });
 });
 
 app.get('/docs', function (request, response) {
-   response.render('docs', {
-      title: 'API Docs'
-   })
+    response.render('docs', {
+        title: 'API Docs'
+    })
 });
 
 
@@ -49,13 +49,13 @@ app.post('/process_email', callbacks.handleEmailRequest);
 
 // render 404 for unsuccessful requests
 app.get('*', (request, response) => {
-   response.render('error_404')
+    response.render('error_404')
 });
 
 
 // Start server
 const port = 5000;
 app.listen(port, () => {
-   console.log('Listening . . . ');
+    console.log('Listening . . . ');
 });
 
