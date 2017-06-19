@@ -1,0 +1,24 @@
+extends base
+
+block head
+    link(rel="stylesheet" href="/css/upload.css")
+block content
+    div.col-lg-8.text-left
+        h1 File Assessment Upload
+        p.
+            The file uploader will allow you to upload a .txt file to have it read and processed
+            for sentiment analysis. After you have uploaded your file, fill out the email field.
+            Your email is required only because a report about your file will be sent.
+        form.form-group(action="/file-upload", method="POST", enctype="multipart/form-data" id="fileUploadForm")
+            .form-group
+                input.form-control-file#inputFile(name="fileUpload", type='file')
+                small.form-text.text-muted
+                .form-text.text-muted#smallText
+                    small
+                        b ONLY
+                        |  upload
+                        b  .txt
+                        |  files
+                label(for="fileEmail") Email:
+                input#fileEmail.form-control(name="email", placeholder="Email address...")
+            button.btn.btn-primary(type='submit') Submit

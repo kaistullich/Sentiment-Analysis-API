@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const multer = require('multer');
 
 // local modules
 const callbacks = require('./routesCallbacks');
@@ -20,6 +21,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 // form validator
 app.use(expressValidator());
+// multer
+let upload = multer({dest: './uploaded-files/'});
 
 
 // all HTML routes
@@ -35,14 +38,16 @@ app.get('/docs', function (request, response) {
     })
 });
 
-
 // all API GET routes
-app.get('/api/v1/all', callbacks.getAllWords);
 app.get('/api/v1/one-word/:word', callbacks.getOneWord);
-
+app.get('/api/v1/all', callbacks.getAllWords);
 
 // all API POST routes
-app.post('/api/v1/add?', callbacks.addWord);
+app.post('/api/v1/add', callbacks.addWord);
+
+// file upload route
+app.get('/upload',  callbacks.upload);
+app.post('/file-upload', upload.single('fileUpload'), callbacks.handleFileUpload);
 
 // email process route
 app.post('/process_email', callbacks.handleEmailRequest);

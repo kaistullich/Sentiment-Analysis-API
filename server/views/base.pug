@@ -1,100 +1,102 @@
 //- base.pug
 html
-	head
-		meta(charset="utf-8")
-		meta(http-equiv="X-UA-Compatible" content="IE=edge")
-		meta(name="viewport" content="width=device-width, initial-scale=1")
-		title #{title}
-		// fontawesome cdn
-		link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet")
-		// bootstrap
-		link(rel="stylesheet", href="/css/bootstrap.min.css")
-		// base.css file
-		link(href="/css/base.css" rel="stylesheet")
-		//- // jQuery 3.2.1
-		script(src="https://code.jquery.com/jquery-3.2.1.js"
-		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-		crossorigin="anonymous")
-		//- // Bootstrap JS
-		script(src="/js/bootstrap.min.js")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        title #{title}
+        // fontawesome cdn
+        link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet")
+        // bootstrap
+        link(rel="stylesheet", href="/css/bootstrap.min.css")
+        // base.css file
+        link(href="/css/base.css" rel="stylesheet")
+        //- // jQuery 3.2.1
+        script(src="https://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous")
+        //- // Bootstrap JS
+        script(src="/js/bootstrap.min.js")
 
-		//- // any additional scripts/links in this block
-		block head
+        //- // any additional scripts/links in this block
+        block head
 
-	body
-		//- // navbar
-		nav.navbar.navbar-inverse.navbar-fixed-top
-			.container
-				.navbar-header
-					button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-						span.sr-only Toggle navigation
-						span.icon-bar
-						span.icon-bar
-						span.icon-bar
-					a.navbar-brand(href='/')
-						i SA API
-				#navbar.collapse.navbar-collapse
-					ul.nav.navbar-nav
-						li
-							a(href='/docs') Docs
-				//- // end navbar
+    body
+        //- // navbar
+        nav.navbar.navbar-inverse.navbar-fixed-top
+            .container
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='/')
+                        i SA API
+                #navbar.collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        li
+                            a(href='/docs') Docs
+                        li
+                            a(href='/upload') File Upload
+                //- // end navbar
 
-		//- // content for the whole page
-		div.container#base-content-container
-			block content
+        //- // content for the whole page
+        div.container#base-content-container
+            block content
 
-		//- // begin footer
-		footer
-			div.footer#footer
-				div.container
-					div.row
-						//- // navigation links
-						div.col-lg-4.col-md-3.col-sm-12.col-xs-6
-							h3.text-center Navigation
-							ul
-								li
-									a(href="/") Home
-								li
-									a(href="/docs") Docs
-						//- // Contact section
-						div.col-lg-4.col-md-5.col-sm-12.col-xs-12
-							h3.text-center Get in contact with me!
-							//- // successful email submit will show
-							div.alert.alert-success.text-center#emailSuccess(role="alert")
-							//- // error in submit will show
-							div.alert.alert-danger.text-center#emailError(role="alert")
-							ul
-								li
-									div.submit.contact-box
-										form#email-form(action="/send-email" method="POST")
-											label(for="commentTextarea")
-												b Comment / Inquires:
-											textarea.form-control#commentTextarea(placeholder="Type here ...")
-											br
-											label(for="emailAddress")
-												b Your email address:
-											p
-												i *only needed for me to contact you back
-											input.form-control#emailAddress(placeholder="")
-											br
-											input.btn.btn-primary.form-control#submit(placeholder="Submit" type="submit" value="Submit" )
-							//- // social-media images/links
-						div.col-lg-4.col-md-4.col-sm-12.col-xs-12
-							h3.text-center Follow me here!
-							center
-							ul.social
-								li
-									a(href="https://www.facebook.com/profile.php?id=100008360227661" target="_blank")
-										i.fa.fa-facebook(aria-hidden="true")
-								li
-									a(href="https://github.com/kaistullich" target="_blank")
-										i.fa.fa-github(aria-hidden="true")
-								li
-									a(href="https://www.linkedin.com/in/kai-stullich-a0697a91/" target="_blank")
-										i.fa.fa-linkedin(aria-hidden="true")
-					div.row#footer-bottom
-						div.container
-							- var currentYear = new Date().getFullYear();
-							p.text-center Created by Kai Stullich - Copyright &copy #{currentYear}
-			//- // end footer
-			script(src="/js/send-email.js")
+        //- // begin footer
+        footer
+            div.footer#footer
+                div.container
+                    div.row
+                        //- // navigation links
+                        div.col-lg-4.col-md-3.col-sm-12.col-xs-6
+                            h3.text-center Navigation
+                            ul
+                                li
+                                    a(href="/") Home
+                                li
+                                    a(href="/docs") Docs
+                        //- // Contact section
+                        div.col-lg-4.col-md-5.col-sm-12.col-xs-12
+                            h3.text-center Get in contact with me!
+                            //- // successful email submit will show
+                            div.alert.alert-success.text-center#emailSuccess(role="alert")
+                            //- // error in submit will show
+                            div.alert.alert-danger.text-center#emailError(role="alert")
+                            ul
+                                li
+                                    div.submit.contact-box
+                                        form#email-form(action="/send-email" method="POST")
+                                            label(for="commentTextarea")
+                                                b Comment / Inquires:
+                                            textarea.form-control#commentTextarea(placeholder="Type here ...")
+                                            br
+                                            label(for="emailAddress")
+                                                b Your email address:
+                                            p
+                                                i *only needed for me to contact you back
+                                            input.form-control#emailAddress(placeholder="")
+                                            br
+                                            input.btn.btn-primary.form-control#submit(placeholder="Submit" type="submit" value="Submit" )
+                            //- // social-media images/links
+                        div.col-lg-4.col-md-4.col-sm-12.col-xs-12
+                            h3.text-center Follow me here!
+                            center
+                            ul.social
+                                li
+                                    a(href="https://www.facebook.com/profile.php?id=100008360227661" target="_blank")
+                                        i.fa.fa-facebook(aria-hidden="true")
+                                li
+                                    a(href="https://github.com/kaistullich" target="_blank")
+                                        i.fa.fa-github(aria-hidden="true")
+                                li
+                                    a(href="https://www.linkedin.com/in/kai-stullich-a0697a91/" target="_blank")
+                                        i.fa.fa-linkedin(aria-hidden="true")
+                    div.row#footer-bottom
+                        div.container
+                            - var currentYear = new Date().getFullYear();
+                            p.text-center Created by Kai Stullich - Copyright &copy #{currentYear}
+            //- // end footer
+            script(src="/js/send-email.js")

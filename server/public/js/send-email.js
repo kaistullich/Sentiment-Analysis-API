@@ -3,7 +3,7 @@ $(document).ready(function () {
     let successAlert = $('#emailSuccess').hide();
     let errorAlert = $('#emailError').hide();
 
-    $('form').on('submit', (event) => {
+    $('#email-form').on('submit', (event) => {
         // prevent default form submit action
         event.preventDefault();
 
