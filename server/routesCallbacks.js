@@ -143,7 +143,7 @@ function handleFileUpload(request, response, next) {
     // go back up directory
     process.chdir('./');
     // path to folder
-    let folderPath = path.join(process.cwd(), '\\uploaded-files\\');
+    let folderPath = path.join(process.cwd(), 'uploaded-files\\');
     fs.readFile(folderPath + `${filename}`, 'utf-8', (error, data) => {
         if (error) {
             throw error
