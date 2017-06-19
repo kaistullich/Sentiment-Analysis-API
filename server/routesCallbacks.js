@@ -3,7 +3,7 @@ let nodemailer = require('nodemailer');
 
 // Local modules/packages
 const {statuses} = require('./httpStatusCodes');
-const {Words} = require('./models/wordsModel');
+const {Words} = require('./models/database_models');
 const {mongoose} = require('../db/mongoose');
 const {saveFileUpload} = require('./fileUpload');
 const config = require('./config.json');

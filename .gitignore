@@ -7,3 +7,4 @@ testing_space
 server/config.json
 server/public/css/styles
 server/convertcsv.json
+uploaded-files/

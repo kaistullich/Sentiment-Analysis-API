@@ -17,6 +17,7 @@ let wordsSchema = mongoose.Schema({
     }
 });
 
+// file upload schema
 let fileUploadSchema = mongoose.Schema({
     file: {
         type: String,
@@ -29,11 +30,11 @@ let fileUploadSchema = mongoose.Schema({
     }
 });
 
-// model for the `wordsSchema`
+// instantiate models
 let Words = mongoose.model('Word', wordsSchema);
 let UploadFile = mongoose.model('UploadedFiles', fileUploadSchema);
 
-// export Word model
+// export models
 module.exports = {
     UploadFile,
     Words,

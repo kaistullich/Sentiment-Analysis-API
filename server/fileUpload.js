@@ -2,7 +2,7 @@
  * Created by Kai on 6/18/2017.
  */
 
-const {UploadFile} = require('./models/wordsModel');
+const {UploadFile} = require('./models/database_models');
 
 function saveFileUpload(file, email) {
     let newFile = new UploadFile({
