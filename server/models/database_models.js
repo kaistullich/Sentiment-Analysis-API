@@ -19,6 +19,7 @@ let wordsSchema = mongoose.Schema({
 
 // file upload schema
 let fileUploadSchema = mongoose.Schema({
+    // TODO: create a filename field
     file: {
         type: String,
         required: true,
