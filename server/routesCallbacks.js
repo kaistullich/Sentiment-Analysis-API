@@ -5,6 +5,7 @@ let nodemailer = require('nodemailer');
 const {statuses} = require('./httpStatusCodes');
 const {Words} = require('./models/wordsModel');
 const {mongoose} = require('../db/mongoose');
+const {saveFileUpload} = require('./fileUpload');
 const config = require('./config.json');
 const fs = require('fs');
 const path = require('path');
@@ -136,6 +137,8 @@ function upload(request, response, next) {
 
 // route `/file-upload`
 function handleFileUpload(request, response, next) {
+    // email address
+    let email = request.body.email;
     // name of file that was uploaded
     let originalFileName = request.file.originalname;
     // unique filename given by multer
@@ -154,10 +157,22 @@ function handleFileUpload(request, response, next) {
                 if (error) {
                     throw error
                 }
-            })
+            });
         }
     });
-    response.redirect('/');
+    // read the file back
+    fs.readFile(folderPath + `${originalFileName}`, 'utf-8', (error, file) => {
+        if (error) {
+            throw error
+        }
+        else {
+            // upload file to MongoDB
+            saveFileUpload(file, email)
+        }
+    });
+    // redirect to upload
+    // TODO: show a success/error message after upload
+    response.redirect('/upload');
     next();
 }
 
