@@ -146,6 +146,10 @@ function upload(request, response, next) {
 // *** /upload-file ****
 // *****************
 
+// TODO: Look at this error
+// Error: EPERM: operation not permitted, rename 'C:\Users\Kai\projects\Sentiment-Analysis-API\uploaded-files\ac9484a42190f063acf7b6bd339ec206' -> 'C:\Users\Kai\projects\Sentiment-Analysis-API\uploaded-files\kai.txt'
+// at Error (native)
+
 function handleFileUpload(request, response, next) {
     // email address
     let email = request.body.email;
@@ -190,10 +194,10 @@ function handleFileUpload(request, response, next) {
             });
         }
     });
-    // redirect to upload
-    // TODO: show a success/error message after upload
-    response.redirect('/upload');
-    next();
+        // redirect to upload
+        // TODO: show a success/error message after upload
+        response.redirect('/upload');
+        next();
 }
 
 

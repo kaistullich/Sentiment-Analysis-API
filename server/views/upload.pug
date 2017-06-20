@@ -2,6 +2,19 @@ extends base
 
 block head
     link(rel="stylesheet" href="/css/upload.css")
+    style(type="text/css").
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
 block content
     div.col-lg-8.text-left
         h1 File Assessment Upload
@@ -9,9 +22,10 @@ block content
             The file uploader will allow you to upload a .txt file to have it read and processed
             for sentiment analysis. After you have uploaded your file, fill out the email field.
             Your email is required only because a report about your file will be sent.
+        h3.alert.alert-danger.text-center#emailValidationError
         form.form-group(action="/file-upload", method="POST", enctype="multipart/form-data" id="fileUploadForm")
             .form-group
-                input.form-control-file#inputFile(name="fileUpload", type='file')
+                input.form-control-file#txtFileUpload(name="fileUpload", type='file')
                 small.form-text.text-muted
                 .form-text.text-muted#smallText
                     small
@@ -20,5 +34,37 @@ block content
                         b  .txt
                         |  files
                 label(for="fileEmail") Email:
+                // #{emailErrors.errors[0].msg}
+                // #{emailErrors.errors[0].value}
                 input#fileEmail.form-control(name="email", placeholder="Email address...")
-            button.btn.btn-primary(type='submit') Submit
+            button.btn.btn-primary#fileSubmitBtn(type='submit' onclick=('isValidEmailAddress()')) Submit
+
+    script.
+        $(document).ready(function () {
+            // hide error
+            $('#emailValidationError').hide();
+            // disable submit button
+            $('#fileSubmitBtn').prop('disabled', true);
+            // validate email inputted
+            $('#fileEmail').focusout(function () {
+                $('#fileEmail').filter(function () {
+                    var email = $('#fileEmail').val();
+                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                    // if email does not match or empty
+                    if (!emailReg.test(email) || email === '') {
+                        $('#emailValidationError').show().html('Email entered is invalid or missing');
+                        $('#fileEmail').focus(function () {
+                            $('#emailValidationError').hide();
+                        })
+                    }
+                    // if file upload empty
+                    if ($('#txtFileUpload').get(0).files.length === 0) {
+                        $('#emailValidationError').show().html('The file is missing');
+                    }
+                    // if all valid
+                    if (emailReg.test(email) && email !== '' && $('#txtFileUpload').get(0).files.length !== 0) {
+                        $('#fileSubmitBtn').prop('disabled', false);
+                    }
+                })
+            });
+        });
