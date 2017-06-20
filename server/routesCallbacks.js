@@ -144,9 +144,10 @@ function handleFileUpload(request, response, next) {
     // unique filename given by multer
     let filename = request.file.filename;
     // go back up directory
-    process.chdir('./');
+    process.chdir('../');
     // path to folder
     let folderPath = path.join(process.cwd(), 'uploaded-files\\');
+    console.log(`Folder path is: ${folderPath}`);
     fs.readFile(folderPath + `${filename}`, 'utf-8', (error, data) => {
         if (error) {
             throw error
@@ -158,16 +159,16 @@ function handleFileUpload(request, response, next) {
                     throw error
                 }
             });
-        }
-    });
-    // read the file back
-    fs.readFile(folderPath + `${originalFileName}`, 'utf-8', (error, file) => {
-        if (error) {
-            throw error
-        }
-        else {
-            // upload file to MongoDB
-            saveFileUpload(file, email)
+            // read the file back
+            fs.readFile(folderPath + `${originalFileName}`, 'utf-8', (error, file) => {
+                if (error) {
+                    throw error
+                }
+                else {
+                    // upload file to MongoDB
+                    saveFileUpload(file, email)
+                }
+            });
         }
     });
     // redirect to upload
@@ -250,3 +251,8 @@ module.exports = {
     handleFileUpload,
     handleEmailRequest
 };
+
+
+
+
+// *#FCK#jd^@GITHUB-502bd2ba

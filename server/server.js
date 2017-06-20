@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // form validator
 app.use(expressValidator());
 // multer
-let upload = multer({dest: './uploaded-files/'});
+let upload = multer({dest: '../uploaded-files/'});
 
 
 // all HTML routes
