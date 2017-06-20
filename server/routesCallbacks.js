@@ -11,11 +11,10 @@ const fs = require('fs');
 const path = require('path');
 
 
-// ****************
-// ** GET ROUTES **
-// ****************
+// ***************
+// ***  api/v1/all ***
+// ***************
 
-// route `api/v1/all`
 function getAllWords(request, response) {
 
     // init reply object
@@ -40,7 +39,11 @@ function getAllWords(request, response) {
     }).select('-__v -_id');
 }
 
-// route `/api/v1/one-word/:word
+
+// **********************
+// *** api/v1/word/:word ***
+// **********************
+
 function getOneWord(request, response) {
 
     // init reply object
@@ -84,7 +87,7 @@ function getOneWord(request, response) {
 
 
 // *****************
-// ** POST ROUTES **
+// *** api/v1/add? ***
 // *****************
 
 // route `api/v1/add?
@@ -130,12 +133,19 @@ function addWord(request, response, next) {
     });
 }
 
-// route `/upload`
+// *************
+// *** /upload ***
+// *************
+
 function upload(request, response, next) {
     response.render('upload');
 }
 
-// route `/file-upload`
+
+// *****************
+// *** /upload-file ****
+// *****************
+
 function handleFileUpload(request, response, next) {
     // email address
     let email = request.body.email;
@@ -165,8 +175,17 @@ function handleFileUpload(request, response, next) {
                     throw error
                 }
                 else {
-                    // upload file to MongoDB
-                    saveFileUpload(file, email)
+                    // send file for upload to DB
+                    saveFileUpload(file, email);
+                    // remove file from folder
+                    fs.unlink(folderPath + `${originalFileName}`, (error) => {
+                        if (error) {
+                            console.log('Error removing file');
+                            throw error
+                        } else {
+                            console.log('Deleted file successfully');
+                        }
+                    })
                 }
             });
         }
